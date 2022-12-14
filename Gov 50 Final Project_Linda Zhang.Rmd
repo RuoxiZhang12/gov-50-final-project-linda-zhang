@@ -1,0 +1,252 @@
+---
+title: "Gov 50 Final Project"
+author: "Linda"
+date: "2022-12-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+wvs <- read_csv("WVS_Cross-National_Wave_7_csv_v4_0.csv")
+wvs
+```
+
+```{r}
+wvs1 <- wvs |>
+  select(A_YEAR, A_STUDY, B_COUNTRY, B_COUNTRY_ALPHA, D_INTERVIEW, L_INTERVIEWER_NUMBER, Q275, Q288, Q199:Q212)
+wvs1
+```
+
+```{r}
+wvs2 <- wvs1 |>
+  rename(education = Q275,
+         income = Q288,
+         political_interest = Q199,
+         discuss_w_friends = Q200,
+         newspaper = Q201,
+         tv = Q202,
+         radio = Q203,
+         phone = Q204,
+         email = Q205,
+         internet = Q206,
+         social_media = Q207,
+         informal_talks = Q208,
+         petition = Q209,
+         boycotts = Q210,
+         demonstrations = Q211,
+         strikes = Q212)
+wvs2
+```
+
+
+```{r}
+library(countrycode)
+wvs3 <- wvs2 |>
+  mutate(Country = countrycode(B_COUNTRY_ALPHA, origin = "iso3c", destination = "country.name")) |>
+  select(!c(B_COUNTRY, B_COUNTRY_ALPHA))
+wvs3
+```
+
+
+```{r}
+wvs_data <- wvs3 |>
+  group_by(Country) |>
+  summarize(education = mean(education, na.rm = TRUE) / 8,
+         income = mean(income, na.rm = TRUE) / 10,
+         political_interest = mean(political_interest, na.rm = TRUE) / 4,
+         discuss_w_friends = mean(discuss_w_friends, na.rm = TRUE) / 3,
+         newspaper = mean(newspaper, na.rm = TRUE) / 5,
+         tv = mean(tv, na.rm = TRUE) / 5,
+         radio = mean(radio, na.rm = TRUE) / 5,
+         phone = mean(phone, na.rm = TRUE) / 5,
+         email = mean(email, na.rm = TRUE) / 5,
+         internet = mean(internet, na.rm = TRUE) / 5,
+         social_media = mean(social_media, na.rm = TRUE) / 5,
+         informal_talks = mean(informal_talks, na.rm = TRUE) / 5,
+         petition = mean(petition, na.rm = TRUE) / 3,
+         boycotts = mean(boycotts, na.rm = TRUE) / 3,
+         demonstrations = mean(demonstrations, na.rm = TRUE) / 3,
+         strikes = mean(strikes, na.rm = TRUE) / 3
+            )
+wvs_data
+```
+
+
+```{r}
+freedom_house <- read_csv("Freedom of the Press 2017.csv")
+freedom_house <- freedom_house |>
+  rename(total_score = "Total Score") |>
+  mutate(total_score = as.integer(total_score)) |>
+  group_by(Country) |>
+  summarize(media_freedom_score = total_score)
+freedom_house
+```
+
+
+```{r}
+freedom <- wvs_data |>
+  inner_join(freedom_house) |>
+  select(Country, media_freedom_score, education:strikes)
+freedom
+```
+
+```{r}
+media_petition <- freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = petition)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Join Petition",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Join Petition")
+media_petition
+
+media_boycotts <-freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = boycotts)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Participate in Boycotts",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Participate in Boycotts")
+media_boycotts
+
+media_demonstrations <- freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = demonstrations)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Attend Lawful Demonstrations",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Attend Lawful Demonstrations")
+media_demonstrations
+
+media_strikes <- freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = strikes)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Join Unofficial Strikes",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Join Unofficial Strikes")
+media_strikes
+```
+
+
+```{r}
+library(infer)
+library(broom)
+fit_petition <- lm(petition ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_petition,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+```{r}
+fit_boycotts <- lm(boycotts ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_boycotts,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+```{r}
+fit_demonstrations <- lm(demonstrations ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_demonstrations,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+```{r}
+fit_strikes <- lm(strikes ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_strikes,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+## Cleaning up data
+
+
+## Introduction
+Research question:
+1-2 paragraphs
+
+## Data and research design
+Description of data
+description of research design: cross-sectional
+a plot that summarizes the dependent variable (both a table and a histogram? in ascendency)
+a couple of paragraphs
+
+## Data Analysis
+Multiple regression
+Explanation and analysis (in plain English) the main coefficient of interest in your regression, comment on the statistical significance of the estimated coefficient, and  say whether or not you believe the coefficient to represent a causal effect.)
+
+## Conclusion
+recap of results
+discussions of limitations of study
+how to improve the study in the future
+1 paragraph
