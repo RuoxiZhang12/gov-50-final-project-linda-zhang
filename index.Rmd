@@ -1,0 +1,295 @@
+---
+title: "Gov 50 Final Project"
+author: "Linda"
+date: "2022-12-14"
+output:
+    distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Cleaning up data
+
+```{r}
+library(tidyverse)
+wvs <- read_csv("WVS_Cross-National_Wave_7_csv_v4_0.csv")
+wvs
+```
+
+```{r}
+wvs1 <- wvs |>
+  select(A_YEAR, A_STUDY, B_COUNTRY, B_COUNTRY_ALPHA, D_INTERVIEW, L_INTERVIEWER_NUMBER, Q275, Q288, Q199:Q212)
+wvs1
+```
+
+```{r}
+wvs2 <- wvs1 |>
+  rename(education = Q275,
+         income = Q288,
+         political_interest = Q199,
+         discuss_w_friends = Q200,
+         newspaper = Q201,
+         tv = Q202,
+         radio = Q203,
+         phone = Q204,
+         email = Q205,
+         internet = Q206,
+         social_media = Q207,
+         informal_talks = Q208,
+         petition = Q209,
+         boycotts = Q210,
+         demonstrations = Q211,
+         strikes = Q212)
+wvs2
+```
+
+
+```{r}
+library(countrycode)
+wvs3 <- wvs2 |>
+  mutate(Country = countrycode(B_COUNTRY_ALPHA, origin = "iso3c", destination = "country.name")) |>
+  select(!c(B_COUNTRY, B_COUNTRY_ALPHA))
+wvs3
+```
+
+
+```{r}
+wvs_data <- wvs3 |>
+  group_by(Country) |>
+  summarize(education = mean(education, na.rm = TRUE) / 8,
+         income = mean(income, na.rm = TRUE) / 10,
+         political_interest = (4 - mean(political_interest, na.rm = TRUE)) / 4,
+         discuss_w_friends = (3 - mean(discuss_w_friends, na.rm = TRUE)) / 3,
+         newspaper = (5 - mean(newspaper, na.rm = TRUE)) / 5,
+         tv = (5 - mean(tv, na.rm = TRUE)) / 5,
+         radio = (5 - mean(radio, na.rm = TRUE)) / 5,
+         phone = (5 - mean(phone, na.rm = TRUE)) / 5,
+         email = (5 - mean(email, na.rm = TRUE)) / 5,
+         internet = (5 - mean(internet, na.rm = TRUE)) / 5,
+         social_media = (5 - mean(social_media, na.rm = TRUE)) / 5,
+         informal_talks = (5 - mean(informal_talks, na.rm = TRUE)) / 5,
+         petition = (3 - mean(petition, na.rm = TRUE)) / 3,
+         boycotts = (3 - mean(boycotts, na.rm = TRUE)) / 3,
+         demonstrations = (3 - mean(demonstrations, na.rm = TRUE)) / 3,
+         strikes = (3 - mean(strikes, na.rm = TRUE)) / 3
+            )
+wvs_data
+```
+
+
+```{r}
+freedom_house <- read_csv("Freedom of the Press 2017.csv")
+freedom_house <- freedom_house |>
+  rename(total_score = "Total Score") |>
+  mutate(total_score = as.integer(total_score)) |>
+  group_by(Country) |>
+  summarize(media_freedom_score = (100 - total_score) / 100
+            )
+freedom_house
+```
+
+
+```{r}
+freedom <- wvs_data |>
+  inner_join(freedom_house) |>
+  select(Country, media_freedom_score, education:strikes)
+freedom
+```
+
+
+## Introduction
+
+Does media freedom from government control affect citizens’ political participation? In this study, I plan to examine the extent to which less media free from government control negatively impacts citizens’ political participation. More politically informed citizens in a nation with media freedom, compared to one without it, are likely to be more aware of basic political issues and more interested and involved in political participation as well as voting. From past literature, I hypothesize that the freer the media, the higher the political participation of citizens. This study is a replicate of Media Freedom, Political Knowledge, and Participation (2008) by Peter T. Leeson, using renewed data from 2017-2022.
+
+
+## Data and research design
+
+This research is a cross-sectional study using data merged from two datasets: Freedom House Media Freedom Index (2017) and World Values Survey (2017-2022 wave). I compare data from 55 different countries around the globe from around the same period of 2017-2022 to investigate the research question in hand.
+My key independent variable is the 2017 media freedom score for 55 countries around the globe from Freedom House. This score is a comprehensive measure considering legal, political, and economic aspects of possible government control over media production, and it ranges from 0 (most freedom) to 100 (least freedom). 
+My key dependent variables include citizens’ willingness to participate in political activities including petition, boycotts, demonstrations, and strikes. Data for these variables come from World Values Survey (2017-2022 wave), and they are rescaled to range from 0 (citizens will never participate) to 1 (citizens have history of participation). I also included several control variables including education and income of the citizens, which could be significant confounding factors impacting the citizens’ political knowledge and enthusiasm in political participation. These also came from World Values Survey (2017-2022 wave). By comparing the media freedom scores from different countries and by examining the differences in their citizens’ political participation, I am able to infer the effects media freedom has on citizens’ political participation. The following are plots of raw relationships between media freedom and willingness to participate in each of the four political activities.
+
+
+```{r}
+media_petition <- freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = petition)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Join Petition",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Join Petition")
+media_petition
+
+media_boycotts <-freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = boycotts)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Participate in Boycotts",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Participate in Boycotts")
+media_boycotts
+
+media_demonstrations <- freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = demonstrations)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Attend Lawful Demonstrations",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Attend Lawful Demonstrations")
+media_demonstrations
+
+media_strikes <- freedom |>
+  ggplot(mapping = aes(x = media_freedom_score,
+         y = strikes)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Join Unofficial Strikes",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Join Unofficial Strikes")
+media_strikes
+```
+
+
+```{r}
+education_boycotts <-freedom |>
+  ggplot(mapping = aes(x = education,
+         y = boycotts)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE, color = "indianred1", size = 1.5) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(title = "Media Freedom and Willingness to Participate in Boycotts",
+       x = "Media Freedom Score",
+       y = "Average Willingness to Participate in Boycotts")
+media_boycotts
+fit <- lm(boycotts ~ education, data = freedom)
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "education" = "Education"
+)
+
+modelsummary::modelsummary(fit,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+
+fit2 <- lm(boycotts ~ income, data = freedom)
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "income" = "Income"
+)
+
+modelsummary::modelsummary(fit2,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+## Data Analysis
+
+For the multiple regressions for each of the four political activities, the main coefficient of interest in this regression is that of the media freedom score, which is consistently 0.004. This means that one score increase in the media freedom score is associated with an increase in the willingness to participate in any of the four political activities of 0.4%.
+This estimated coefficient is of statistical significance, as the p values are also consistently far below 0.05. In this case, the null hypothesis of no relationship between media freedom and willingness to participate in political activities can be rejected. This means that the chance that this estimated coefficient is a result of chance and there is actually no relationship between media freedom and willingness to participate in political activities is less than 5%. In the case that possible confounders such as education and income are controlled, I think the coefficient represents a causal effect between media freedom and willingness to participate in any of the four political activities. However, this estimated coefficient might not have as much of a practical significance, because it means that there is barely any effect – the increasing effect in willingness to participate in political activities is very low. ## how do you determine low or high? Consider not mentioning practical significance at all? Also mention that p value for other control variables are high, which means that they are likely to have no relationship with the willingness to participate in political activities. This means that they are probably not good control variables and we should look for others and then judge? (also count as an improvement point)
+
+
+```{r}
+library(infer)
+library(broom)
+fit_petition <- lm(petition ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_petition,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+```{r}
+fit_boycotts <- lm(boycotts ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_boycotts,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+```{r}
+fit_demonstrations <- lm(demonstrations ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_demonstrations,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+
+```{r}
+fit_strikes <- lm(strikes ~ media_freedom_score + education + income + political_interest, data = freedom)
+
+library(broom)
+
+var_labels <- c(
+    "(Intercept)" = "Intercept",
+    "media_freedom_score" = "Media Freedom Score",
+    "education" = "Education",
+    "income" = "Income",
+    "political_interest" = "Political Interest"
+)
+
+modelsummary::modelsummary(fit_strikes,
+                             statistic = c("s.e. = {std.error}",
+               "p = {p.value}"),
+coef_map = var_labels,
+gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+## Conclusion
+
+This study is limited in the number of control variables it controlled. Especially in the case that the p-value for the control variables are high – meaning that they are likely to have no relationship with the willingness to participate in political activities so are not good control variables – it would be crucial if future research can attempt to control more and other variables such as age and polity. Additionally, it would be beneficial if future studies can take an experimental approach to this topic and do a natural experiment on two similar countries, if there is a chance. This would also help with controlling confounders and being more able to come to a causal conclusion.
+
+
