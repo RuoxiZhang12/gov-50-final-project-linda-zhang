@@ -1,0 +1,964 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+  \newcolumntype{d}{S[
+    input-open-uncertainty=,
+    input-close-uncertainty=,
+    parse-numbers = false,
+    table-align-text-pre=false,
+    table-align-text-post=false
+  ]}
+  
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Gov 50 Final Project},
+  pdfauthor={Linda},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Gov 50 Final Project}
+\author{Linda}
+\date{2022-12-14}
+
+\begin{document}
+\maketitle
+
+\hypertarget{cleaning-up-data}{%
+\subsection{Cleaning up data}\label{cleaning-up-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+## v ggplot2 3.3.6      v purrr   0.3.4 
+## v tibble  3.1.8      v dplyr   1.0.10
+## v tidyr   1.2.0      v stringr 1.4.1 
+## v readr   2.1.2      v forcats 0.5.2 
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wvs }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"WVS\_Cross{-}National\_Wave\_7\_csv\_v4\_0.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 87822 Columns: 552
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr  (10): version, doi, B_COUNTRY_ALPHA, C_COW_ALPHA, LNGE_ISO, NAME, Party...
+## dbl (542): A_WAVE, A_YEAR, A_STUDY, B_COUNTRY, C_COW_NUM, D_INTERVIEW, J_INT...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wvs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 87,822 x 552
+##    version   doi   A_WAVE A_YEAR A_STUDY B_COU~1 B_COU~2 C_COW~3 C_COW~4 D_INT~5
+##    <chr>     <chr>  <dbl>  <dbl>   <dbl>   <dbl> <chr>     <dbl> <chr>     <dbl>
+##  1 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  2 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  3 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  4 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  5 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  6 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  7 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  8 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+##  9 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+## 10 4-0-0 (2~ doi.~      7   2019       2     196 CYP         352 CYP      1.96e8
+## # ... with 87,812 more rows, 542 more variables: J_INTDATE <dbl>,
+## #   FW_START <dbl>, FW_END <dbl>, K_TIME_START <dbl>, K_TIME_END <dbl>,
+## #   K_DURATION <dbl>, Q_MODE <dbl>, N_REGION_ISO <dbl>, N_REGION_WVS <dbl>,
+## #   N_TOWN <dbl>, G_TOWNSIZE <dbl>, G_TOWNSIZE2 <dbl>, H_SETTLEMENT <dbl>,
+## #   H_URBRURAL <dbl>, I_PSU <dbl>, O1_LONGITUDE <dbl>, O2_LATITUDE <dbl>,
+## #   L_INTERVIEWER_NUMBER <dbl>, S_INTLANGUAGE <dbl>, LNGE_ISO <chr>,
+## #   E_RESPINT <dbl>, F_INTPRIVACY <dbl>, E1_LITERACY <dbl>, W_WEIGHT <dbl>, ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wvs1 }\OtherTok{\textless{}{-}}\NormalTok{ wvs }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(A\_YEAR, A\_STUDY, B\_COUNTRY, B\_COUNTRY\_ALPHA, D\_INTERVIEW, L\_INTERVIEWER\_NUMBER, Q275, Q288, Q199}\SpecialCharTok{:}\NormalTok{Q212)}
+\NormalTok{wvs1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 87,822 x 22
+##    A_YEAR A_STUDY B_COUN~1 B_COU~2 D_INT~3 L_INT~4  Q275  Q288  Q199  Q200  Q201
+##     <dbl>   <dbl>    <dbl> <chr>     <dbl>   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1   2019       2      196 CYP      1.96e8     633     1     5     4     3     5
+##  2   2019       2      196 CYP      1.96e8     633     1     5     3     3     1
+##  3   2019       2      196 CYP      1.96e8     633     4     3     3     2     2
+##  4   2019       2      196 CYP      1.96e8     633     3     5     3     3     5
+##  5   2019       2      196 CYP      1.96e8     633     3     3     4     3     5
+##  6   2019       2      196 CYP      1.96e8     633     3     5     4     2     5
+##  7   2019       2      196 CYP      1.96e8     633     2     3     4     2     5
+##  8   2019       2      196 CYP      1.96e8     633     3     5     4     3     5
+##  9   2019       2      196 CYP      1.96e8     633     1     7     4     2     5
+## 10   2019       2      196 CYP      1.96e8     633     0     3     4     3     5
+## # ... with 87,812 more rows, 11 more variables: Q202 <dbl>, Q203 <dbl>,
+## #   Q204 <dbl>, Q205 <dbl>, Q206 <dbl>, Q207 <dbl>, Q208 <dbl>, Q209 <dbl>,
+## #   Q210 <dbl>, Q211 <dbl>, Q212 <dbl>, and abbreviated variable names
+## #   1: B_COUNTRY, 2: B_COUNTRY_ALPHA, 3: D_INTERVIEW, 4: L_INTERVIEWER_NUMBER
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wvs2 }\OtherTok{\textless{}{-}}\NormalTok{ wvs1 }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{education =}\NormalTok{ Q275,}
+         \AttributeTok{income =}\NormalTok{ Q288,}
+         \AttributeTok{political\_interest =}\NormalTok{ Q199,}
+         \AttributeTok{discuss\_w\_friends =}\NormalTok{ Q200,}
+         \AttributeTok{newspaper =}\NormalTok{ Q201,}
+         \AttributeTok{tv =}\NormalTok{ Q202,}
+         \AttributeTok{radio =}\NormalTok{ Q203,}
+         \AttributeTok{phone =}\NormalTok{ Q204,}
+         \AttributeTok{email =}\NormalTok{ Q205,}
+         \AttributeTok{internet =}\NormalTok{ Q206,}
+         \AttributeTok{social\_media =}\NormalTok{ Q207,}
+         \AttributeTok{informal\_talks =}\NormalTok{ Q208,}
+         \AttributeTok{petition =}\NormalTok{ Q209,}
+         \AttributeTok{boycotts =}\NormalTok{ Q210,}
+         \AttributeTok{demonstrations =}\NormalTok{ Q211,}
+         \AttributeTok{strikes =}\NormalTok{ Q212)}
+\NormalTok{wvs2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 87,822 x 22
+##    A_YEAR A_STUDY B_COU~1 B_COU~2 D_INT~3 L_INT~4 educa~5 income polit~6 discu~7
+##     <dbl>   <dbl>   <dbl> <chr>     <dbl>   <dbl>   <dbl>  <dbl>   <dbl>   <dbl>
+##  1   2019       2     196 CYP      1.96e8     633       1      5       4       3
+##  2   2019       2     196 CYP      1.96e8     633       1      5       3       3
+##  3   2019       2     196 CYP      1.96e8     633       4      3       3       2
+##  4   2019       2     196 CYP      1.96e8     633       3      5       3       3
+##  5   2019       2     196 CYP      1.96e8     633       3      3       4       3
+##  6   2019       2     196 CYP      1.96e8     633       3      5       4       2
+##  7   2019       2     196 CYP      1.96e8     633       2      3       4       2
+##  8   2019       2     196 CYP      1.96e8     633       3      5       4       3
+##  9   2019       2     196 CYP      1.96e8     633       1      7       4       2
+## 10   2019       2     196 CYP      1.96e8     633       0      3       4       3
+## # ... with 87,812 more rows, 12 more variables: newspaper <dbl>, tv <dbl>,
+## #   radio <dbl>, phone <dbl>, email <dbl>, internet <dbl>, social_media <dbl>,
+## #   informal_talks <dbl>, petition <dbl>, boycotts <dbl>, demonstrations <dbl>,
+## #   strikes <dbl>, and abbreviated variable names 1: B_COUNTRY,
+## #   2: B_COUNTRY_ALPHA, 3: D_INTERVIEW, 4: L_INTERVIEWER_NUMBER, 5: education,
+## #   6: political_interest, 7: discuss_w_friends
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(countrycode)}
+\NormalTok{wvs3 }\OtherTok{\textless{}{-}}\NormalTok{ wvs2 }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Country =} \FunctionTok{countrycode}\NormalTok{(B\_COUNTRY\_ALPHA, }\AttributeTok{origin =} \StringTok{"iso3c"}\NormalTok{, }\AttributeTok{destination =} \StringTok{"country.name"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{c}\NormalTok{(B\_COUNTRY, B\_COUNTRY\_ALPHA))}
+\NormalTok{wvs3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 87,822 x 21
+##    A_YEAR A_STUDY D_INTER~1 L_INT~2 educa~3 income polit~4 discu~5 newsp~6    tv
+##     <dbl>   <dbl>     <dbl>   <dbl>   <dbl>  <dbl>   <dbl>   <dbl>   <dbl> <dbl>
+##  1   2019       2 196070011     633       1      5       4       3       5     1
+##  2   2019       2 196070036     633       1      5       3       3       1     1
+##  3   2019       2 196070039     633       4      3       3       2       2     1
+##  4   2019       2 196070040     633       3      5       3       3       5     1
+##  5   2019       2 196070053     633       3      3       4       3       5     1
+##  6   2019       2 196070058     633       3      5       4       2       5     1
+##  7   2019       2 196070067     633       2      3       4       2       5     1
+##  8   2019       2 196070069     633       3      5       4       3       5     1
+##  9   2019       2 196070070     633       1      7       4       2       5     1
+## 10   2019       2 196070074     633       0      3       4       3       5     1
+## # ... with 87,812 more rows, 11 more variables: radio <dbl>, phone <dbl>,
+## #   email <dbl>, internet <dbl>, social_media <dbl>, informal_talks <dbl>,
+## #   petition <dbl>, boycotts <dbl>, demonstrations <dbl>, strikes <dbl>,
+## #   Country <chr>, and abbreviated variable names 1: D_INTERVIEW,
+## #   2: L_INTERVIEWER_NUMBER, 3: education, 4: political_interest,
+## #   5: discuss_w_friends, 6: newspaper
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wvs\_data }\OtherTok{\textless{}{-}}\NormalTok{ wvs3 }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(Country) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{education =} \FunctionTok{mean}\NormalTok{(education, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{/} \DecValTok{8}\NormalTok{,}
+         \AttributeTok{income =} \FunctionTok{mean}\NormalTok{(income, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{/} \DecValTok{10}\NormalTok{,}
+         \AttributeTok{political\_interest =}\NormalTok{ (}\DecValTok{4} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(political\_interest, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{4}\NormalTok{,}
+         \AttributeTok{discuss\_w\_friends =}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(discuss\_w\_friends, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{3}\NormalTok{,}
+         \AttributeTok{newspaper =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(newspaper, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{tv =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(tv, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{radio =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(radio, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{phone =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(phone, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{email =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(email, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{internet =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(internet, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{social\_media =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(social\_media, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{informal\_talks =}\NormalTok{ (}\DecValTok{5} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(informal\_talks, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{5}\NormalTok{,}
+         \AttributeTok{petition =}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(petition, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{3}\NormalTok{,}
+         \AttributeTok{boycotts =}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(boycotts, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{3}\NormalTok{,}
+         \AttributeTok{demonstrations =}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(demonstrations, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{3}\NormalTok{,}
+         \AttributeTok{strikes =}\NormalTok{ (}\DecValTok{3} \SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(strikes, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)) }\SpecialCharTok{/} \DecValTok{3}
+\NormalTok{            )}
+\NormalTok{wvs\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 59 x 17
+##    Country    education income politi~1 discu~2 newsp~3    tv radio phone  email
+##    <chr>          <dbl>  <dbl>    <dbl>   <dbl>   <dbl> <dbl> <dbl> <dbl>  <dbl>
+##  1 Andorra        0.482  0.536    0.330   0.277  0.632  0.644 0.358 0.497 0.359 
+##  2 Argentina      0.342  0.508    0.293   0.250  0.355  0.693 0.486 0.505 0.310 
+##  3 Armenia        0.555  0.470    0.387   0.422  0.0981 0.657 0.134 0.590 0.159 
+##  4 Australia      0.582  0.513    0.413   0.317  0.448  0.677 0.612 0.519 0.467 
+##  5 Bangladesh     0.232  0.562    0.258   0.219  0.259  0.690 0.129 0.449 0.0676
+##  6 Bolivia        0.419  0.501    0.239   0.200  0.351  0.731 0.498 0.406 0.183 
+##  7 Brazil         0.347  0.402    0.276   0.237  0.309  0.656 0.340 0.532 0.275 
+##  8 Canada         0.612  0.557    0.432   0.325  0.370  0.554 0.488 0.549 0.508 
+##  9 Chile          0.478  0.468    0.234   0.184  0.410  0.674 0.476 0.520 0.403 
+## 10 China          0.354  0.415    0.378   0.241  0.165  0.620 0.180 0.621 0.173 
+## # ... with 49 more rows, 7 more variables: internet <dbl>, social_media <dbl>,
+## #   informal_talks <dbl>, petition <dbl>, boycotts <dbl>, demonstrations <dbl>,
+## #   strikes <dbl>, and abbreviated variable names 1: political_interest,
+## #   2: discuss_w_friends, 3: newspaper
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freedom\_house }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Freedom of the Press 2017.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 210 Columns: 6
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (6): Country, A-Legal, B-Political, C-Economic, Total Score, Status
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freedom\_house }\OtherTok{\textless{}{-}}\NormalTok{ freedom\_house }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{total\_score =} \StringTok{"Total Score"}\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total\_score =} \FunctionTok{as.integer}\NormalTok{(total\_score)) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{group\_by}\NormalTok{(Country) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{media\_freedom\_score =}\NormalTok{ (}\DecValTok{100} \SpecialCharTok{{-}}\NormalTok{ total\_score) }\SpecialCharTok{/} \DecValTok{100}
+\NormalTok{            )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in mask$eval_all_mutate(quo): 强制改变过程中产生了NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freedom\_house}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 210 x 2
+##    Country             media_freedom_score
+##    <chr>                             <dbl>
+##  1 Afghanistan                        0.4 
+##  2 Albania                            0.49
+##  3 Algeria                            0.35
+##  4 Andorra                            0.85
+##  5 Angola                             0.27
+##  6 Antigua and Barbuda                0.66
+##  7 Argentina                          0.54
+##  8 Armenia                            0.37
+##  9 Australia                          0.78
+## 10 Austria                            0.78
+## # ... with 200 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freedom }\OtherTok{\textless{}{-}}\NormalTok{ wvs\_data }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{inner\_join}\NormalTok{(freedom\_house) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{select}\NormalTok{(Country, media\_freedom\_score, education}\SpecialCharTok{:}\NormalTok{strikes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Joining, by = "Country"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freedom}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 55 x 18
+##    Country    media_f~1 educa~2 income polit~3 discu~4 newsp~5    tv radio phone
+##    <chr>          <dbl>   <dbl>  <dbl>   <dbl>   <dbl>   <dbl> <dbl> <dbl> <dbl>
+##  1 Andorra         0.85   0.482  0.536   0.330   0.277  0.632  0.644 0.358 0.497
+##  2 Argentina       0.54   0.342  0.508   0.293   0.250  0.355  0.693 0.486 0.505
+##  3 Armenia         0.37   0.555  0.470   0.387   0.422  0.0981 0.657 0.134 0.590
+##  4 Australia       0.78   0.582  0.513   0.413   0.317  0.448  0.677 0.612 0.519
+##  5 Bangladesh      0.38   0.232  0.562   0.258   0.219  0.259  0.690 0.129 0.449
+##  6 Bolivia         0.47   0.419  0.501   0.239   0.200  0.351  0.731 0.498 0.406
+##  7 Brazil          0.53   0.347  0.402   0.276   0.237  0.309  0.656 0.340 0.532
+##  8 Canada          0.82   0.612  0.557   0.432   0.325  0.370  0.554 0.488 0.549
+##  9 Chile           0.71   0.478  0.468   0.234   0.184  0.410  0.674 0.476 0.520
+## 10 China           0.13   0.354  0.415   0.378   0.241  0.165  0.620 0.180 0.621
+## # ... with 45 more rows, 8 more variables: email <dbl>, internet <dbl>,
+## #   social_media <dbl>, informal_talks <dbl>, petition <dbl>, boycotts <dbl>,
+## #   demonstrations <dbl>, strikes <dbl>, and abbreviated variable names
+## #   1: media_freedom_score, 2: education, 3: political_interest,
+## #   4: discuss_w_friends, 5: newspaper
+\end{verbatim}
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+Does media freedom from government control affect citizens' political
+participation? In this study, I plan to examine the extent to which more
+media freedom from government control positively impacts citizens'
+political participation. More politically informed citizens in a nation
+with media freedom, compared to one without it, are likely to be more
+aware of basic political issues and more interested and involved in
+political participation (Leeson 156). After reading past literature, I
+hypothesize that the freer the media, the higher the political
+participation of citizens. This study is a similar replicate of
+\emph{Media Freedom, Political Knowledge, and Participation (2008)} by
+Peter T. Leeson, using renewed data from 2017-2022.
+
+\hypertarget{data-and-research-design}{%
+\subsection{Data and research design}\label{data-and-research-design}}
+
+This research is a cross-sectional study using data merged from two
+datasets: Freedom House Media Freedom Index (2017) and World Values
+Survey (2017-2022 wave). I compared data from 55 countries around the
+globe from around the same period of 2017-2022 to investigate the
+research question in hand.
+
+My key dependent variables include citizens' willingness to participate
+in political activities including petition, boycotts, demonstrations,
+and strikes. Data for these variables come from World Values Survey
+(2017-2022 wave), and they are rescaled to range from 0 (citizen will
+never participate) to 1 (citizen have history of participation). All of
+these variables are self-reported by around 1000-4000 survey
+participants from each country in interviews with World Values Survey
+researchers (World Values Survey). Below are distributions of the
+dependent variables in descending order:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{petition\_plot }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{fct\_rev}\NormalTok{(}\FunctionTok{fct\_reorder}\NormalTok{(Country, petition)),}
+                       \AttributeTok{y =}\NormalTok{ petition)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{,}
+                                   \AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{,}
+                                   \AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Willingness to Join Petition"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Willingness to Join Petition by Country"}\NormalTok{)}
+\NormalTok{petition\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boycotts\_plot }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{fct\_rev}\NormalTok{(}\FunctionTok{fct\_reorder}\NormalTok{(Country, boycotts)),}
+                       \AttributeTok{y =}\NormalTok{ boycotts)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{,}
+                                   \AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{,}
+                                   \AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Willingness to Join Boycotts"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Willingness to Join Boycotts by Country"}\NormalTok{)}
+\NormalTok{boycotts\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{demonstrations\_plot }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{fct\_rev}\NormalTok{(}\FunctionTok{fct\_reorder}\NormalTok{(Country, demonstrations)),}
+                       \AttributeTok{y =}\NormalTok{ demonstrations)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{,}
+                                   \AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{,}
+                                   \AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Willingness to Join Demonstrations"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Willingness to Join Demonstrations by Country"}\NormalTok{)}
+\NormalTok{demonstrations\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-8-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{strikes\_plot }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{fct\_rev}\NormalTok{(}\FunctionTok{fct\_reorder}\NormalTok{(Country, strikes)),}
+                       \AttributeTok{y =}\NormalTok{ strikes)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{,}
+                                   \AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{,}
+                                   \AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Country"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Willingness to Join Strikes"}\NormalTok{,}
+       \AttributeTok{title =} \StringTok{"Willingness to Join Strikes by Country"}\NormalTok{)}
+\NormalTok{strikes\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-8-4.pdf}
+
+I also included several control variables including education, income,
+and political interest of the citizens, which are suspected to be
+significant confounding factors impacting the citizens' political
+knowledge and enthusiasm in political participation. Both education and
+income are suspected to make people more aware of political issues and
+their significance, therefore more willing to participate in politics. A
+higher political interest is suspected to make poeple more aware of
+political issues and more exposed to media information regarding
+politics, therefore more influenced by it. People more interested in
+politics are also suspected to be overall more willing to participate
+politically than people who are less interested. The potential that
+these variables can affect the willingness of political participation is
+why they are included and controlled. These also come from World Values
+Survey (2017-2022 wave). All of these variables are self-reported by
+around 1000-4000 survey participants from each country in interviews
+with World Values Survey researchers (World Values Survey).
+
+My key independent variable is the 2017 media freedom score for 55
+countries around the globe from Freedom House. This score is a
+comprehensive measure considering legal (e.g.~laws and constitutions),
+political (e.g.~official and unofficial censorship), and economic
+(e.g.~media-ownership) aspects of possible government control over media
+production in the real world, and I have rescaled it to range from 0
+(least free) to 1 (most free) (Freedom House).
+
+By comparing the media freedom scores from different countries and their
+respective citizens' willingness to participate in petition, boycotts,
+demonstrations, and strikes, I am able to infer the effects media
+freedom has on citizens' political participation. The following are
+scatterplots of raw relationships between media freedom and willingness
+to participate in each of the four political activities, with lines of
+best fit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{media\_petition }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ media\_freedom\_score,}
+         \AttributeTok{y =}\NormalTok{ petition)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"indianred1"}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Media Freedom and Willingness to Join Petition"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Media Freedom Score"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average Willingness to Join Petition"}\NormalTok{)}
+\NormalTok{media\_petition}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{media\_boycotts }\OtherTok{\textless{}{-}}\NormalTok{freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ media\_freedom\_score,}
+         \AttributeTok{y =}\NormalTok{ boycotts)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"indianred1"}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Media Freedom and Willingness to Participate in Boycotts"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Media Freedom Score"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average Willingness to Participate in Boycotts"}\NormalTok{)}
+\NormalTok{media\_boycotts}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{media\_demonstrations }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ media\_freedom\_score,}
+         \AttributeTok{y =}\NormalTok{ demonstrations)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"indianred1"}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Media Freedom and Willingness to Attend Lawful Demonstrations"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Media Freedom Score"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average Willingness to Attend Lawful Demonstrations"}\NormalTok{)}
+\NormalTok{media\_demonstrations}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-9-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{media\_strikes }\OtherTok{\textless{}{-}}\NormalTok{ freedom }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ media\_freedom\_score,}
+         \AttributeTok{y =}\NormalTok{ strikes)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"indianred1"}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Media Freedom and Willingness to Join Unofficial Strikes"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Media Freedom Score"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average Willingness to Join Unofficial Strikes"}\NormalTok{)}
+\NormalTok{media\_strikes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{index_files/figure-latex/unnamed-chunk-9-4.pdf}
+
+\hypertarget{data-analysis}{%
+\subsection{Data Analysis}\label{data-analysis}}
+
+Multiple regression for petition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(infer)}
+\FunctionTok{library}\NormalTok{(broom)}
+\NormalTok{fit\_petition }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(petition }\SpecialCharTok{\textasciitilde{}}\NormalTok{ media\_freedom\_score }\SpecialCharTok{+}\NormalTok{ education }\SpecialCharTok{+}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ political\_interest, }\AttributeTok{data =}\NormalTok{ freedom)}
+
+\FunctionTok{library}\NormalTok{(broom)}
+
+\NormalTok{var\_labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"(Intercept)"} \OtherTok{=} \StringTok{"Intercept"}\NormalTok{,}
+    \StringTok{"media\_freedom\_score"} \OtherTok{=} \StringTok{"Media Freedom Score"}\NormalTok{,}
+    \StringTok{"education"} \OtherTok{=} \StringTok{"Education"}\NormalTok{,}
+    \StringTok{"income"} \OtherTok{=} \StringTok{"Income"}\NormalTok{,}
+    \StringTok{"political\_interest"} \OtherTok{=} \StringTok{"Political Interest"}
+\NormalTok{)}
+
+\NormalTok{modelsummary}\SpecialCharTok{::}\FunctionTok{modelsummary}\NormalTok{(fit\_petition,}
+                             \AttributeTok{statistic =} \FunctionTok{c}\NormalTok{(}\StringTok{"s.e. = \{std.error\}"}\NormalTok{,}
+               \StringTok{"p = \{p.value\}"}\NormalTok{),}
+\AttributeTok{coef\_map =}\NormalTok{ var\_labels,}
+\AttributeTok{gof\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"nobs"}\NormalTok{, }\StringTok{"r.squared"}\NormalTok{, }\StringTok{"adj.r.squared"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & Model 1\\
+\midrule
+Intercept & \num{-0.195}\\
+ & s.e. = \num{0.108}\\
+ & p = \num{0.077}\\
+Media Freedom Score & \num{0.412}\\
+ & s.e. = \num{0.058}\\
+ & p = \num{<0.001}\\
+Education & \num{0.173}\\
+ & s.e. = \num{0.114}\\
+ & p = \num{0.134}\\
+Income & \num{0.084}\\
+ & s.e. = \num{0.220}\\
+ & p = \num{0.705}\\
+Political Interest & \num{0.431}\\
+ & s.e. = \num{0.166}\\
+ & p = \num{0.012}\\
+\midrule
+Num.Obs. & \num{55}\\
+R2 & \num{0.663}\\
+R2 Adj. & \num{0.636}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Multiple regression for boycotts:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_boycotts }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(boycotts }\SpecialCharTok{\textasciitilde{}}\NormalTok{ media\_freedom\_score }\SpecialCharTok{+}\NormalTok{ education }\SpecialCharTok{+}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ political\_interest, }\AttributeTok{data =}\NormalTok{ freedom)}
+
+\FunctionTok{library}\NormalTok{(broom)}
+
+\NormalTok{var\_labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"(Intercept)"} \OtherTok{=} \StringTok{"Intercept"}\NormalTok{,}
+    \StringTok{"media\_freedom\_score"} \OtherTok{=} \StringTok{"Media Freedom Score"}\NormalTok{,}
+    \StringTok{"education"} \OtherTok{=} \StringTok{"Education"}\NormalTok{,}
+    \StringTok{"income"} \OtherTok{=} \StringTok{"Income"}\NormalTok{,}
+    \StringTok{"political\_interest"} \OtherTok{=} \StringTok{"Political Interest"}
+\NormalTok{)}
+
+\NormalTok{modelsummary}\SpecialCharTok{::}\FunctionTok{modelsummary}\NormalTok{(fit\_boycotts,}
+                             \AttributeTok{statistic =} \FunctionTok{c}\NormalTok{(}\StringTok{"s.e. = \{std.error\}"}\NormalTok{,}
+               \StringTok{"p = \{p.value\}"}\NormalTok{),}
+\AttributeTok{coef\_map =}\NormalTok{ var\_labels,}
+\AttributeTok{gof\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"nobs"}\NormalTok{, }\StringTok{"r.squared"}\NormalTok{, }\StringTok{"adj.r.squared"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & Model 1\\
+\midrule
+Intercept & \num{-0.106}\\
+ & s.e. = \num{0.086}\\
+ & p = \num{0.228}\\
+Media Freedom Score & \num{0.155}\\
+ & s.e. = \num{0.046}\\
+ & p = \num{0.002}\\
+Education & \num{0.083}\\
+ & s.e. = \num{0.091}\\
+ & p = \num{0.365}\\
+Income & \num{0.053}\\
+ & s.e. = \num{0.177}\\
+ & p = \num{0.767}\\
+Political Interest & \num{0.351}\\
+ & s.e. = \num{0.134}\\
+ & p = \num{0.011}\\
+\midrule
+Num.Obs. & \num{55}\\
+R2 & \num{0.397}\\
+R2 Adj. & \num{0.349}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Multiple regression for demonstrations:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_demonstrations }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(demonstrations }\SpecialCharTok{\textasciitilde{}}\NormalTok{ media\_freedom\_score }\SpecialCharTok{+}\NormalTok{ education }\SpecialCharTok{+}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ political\_interest, }\AttributeTok{data =}\NormalTok{ freedom)}
+
+\FunctionTok{library}\NormalTok{(broom)}
+
+\NormalTok{var\_labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"(Intercept)"} \OtherTok{=} \StringTok{"Intercept"}\NormalTok{,}
+    \StringTok{"media\_freedom\_score"} \OtherTok{=} \StringTok{"Media Freedom Score"}\NormalTok{,}
+    \StringTok{"education"} \OtherTok{=} \StringTok{"Education"}\NormalTok{,}
+    \StringTok{"income"} \OtherTok{=} \StringTok{"Income"}\NormalTok{,}
+    \StringTok{"political\_interest"} \OtherTok{=} \StringTok{"Political Interest"}
+\NormalTok{)}
+
+\NormalTok{modelsummary}\SpecialCharTok{::}\FunctionTok{modelsummary}\NormalTok{(fit\_demonstrations,}
+                             \AttributeTok{statistic =} \FunctionTok{c}\NormalTok{(}\StringTok{"s.e. = \{std.error\}"}\NormalTok{,}
+               \StringTok{"p = \{p.value\}"}\NormalTok{),}
+\AttributeTok{coef\_map =}\NormalTok{ var\_labels,}
+\AttributeTok{gof\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"nobs"}\NormalTok{, }\StringTok{"r.squared"}\NormalTok{, }\StringTok{"adj.r.squared"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & Model 1\\
+\midrule
+Intercept & \num{0.017}\\
+ & s.e. = \num{0.076}\\
+ & p = \num{0.829}\\
+Media Freedom Score & \num{0.236}\\
+ & s.e. = \num{0.041}\\
+ & p = \num{<0.001}\\
+Education & \num{-0.031}\\
+ & s.e. = \num{0.081}\\
+ & p = \num{0.700}\\
+Income & \num{0.137}\\
+ & s.e. = \num{0.156}\\
+ & p = \num{0.386}\\
+Political Interest & \num{0.088}\\
+ & s.e. = \num{0.118}\\
+ & p = \num{0.459}\\
+\midrule
+Num.Obs. & \num{55}\\
+R2 & \num{0.474}\\
+R2 Adj. & \num{0.432}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Multiple regression for strikes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_strikes }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(strikes }\SpecialCharTok{\textasciitilde{}}\NormalTok{ media\_freedom\_score }\SpecialCharTok{+}\NormalTok{ education }\SpecialCharTok{+}\NormalTok{ income }\SpecialCharTok{+}\NormalTok{ political\_interest, }\AttributeTok{data =}\NormalTok{ freedom)}
+
+\FunctionTok{library}\NormalTok{(broom)}
+
+\NormalTok{var\_labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"(Intercept)"} \OtherTok{=} \StringTok{"Intercept"}\NormalTok{,}
+    \StringTok{"media\_freedom\_score"} \OtherTok{=} \StringTok{"Media Freedom Score"}\NormalTok{,}
+    \StringTok{"education"} \OtherTok{=} \StringTok{"Education"}\NormalTok{,}
+    \StringTok{"income"} \OtherTok{=} \StringTok{"Income"}\NormalTok{,}
+    \StringTok{"political\_interest"} \OtherTok{=} \StringTok{"Political Interest"}
+\NormalTok{)}
+
+\NormalTok{modelsummary}\SpecialCharTok{::}\FunctionTok{modelsummary}\NormalTok{(fit\_strikes,}
+                             \AttributeTok{statistic =} \FunctionTok{c}\NormalTok{(}\StringTok{"s.e. = \{std.error\}"}\NormalTok{,}
+               \StringTok{"p = \{p.value\}"}\NormalTok{),}
+\AttributeTok{coef\_map =}\NormalTok{ var\_labels,}
+\AttributeTok{gof\_map =} \FunctionTok{c}\NormalTok{(}\StringTok{"nobs"}\NormalTok{, }\StringTok{"r.squared"}\NormalTok{, }\StringTok{"adj.r.squared"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+  & Model 1\\
+\midrule
+Intercept & \num{-0.011}\\
+ & s.e. = \num{0.075}\\
+ & p = \num{0.884}\\
+Media Freedom Score & \num{0.235}\\
+ & s.e. = \num{0.040}\\
+ & p = \num{<0.001}\\
+Education & \num{0.001}\\
+ & s.e. = \num{0.079}\\
+ & p = \num{0.985}\\
+Income & \num{0.130}\\
+ & s.e. = \num{0.153}\\
+ & p = \num{0.397}\\
+Political Interest & \num{-0.045}\\
+ & s.e. = \num{0.115}\\
+ & p = \num{0.697}\\
+\midrule
+Num.Obs. & \num{55}\\
+R2 & \num{0.474}\\
+R2 Adj. & \num{0.432}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the multiple regressions for each of the four political activities,
+the main coefficient of interest is that of the media freedom score,
+which is for all four higher than 0.15, with the highest being 0.412 for
+petition. This means that changing one country's media freedom from the
+least free to the most free ((willingness to participate in most free -
+willingness to participate in least free) / willingness to participate
+in most free) is associated with an increase in the willingness to
+participate in petitions of more than 41\%. Changing one country's media
+freedom from the least free to the most free is associated with an
+increase in the willingness to participate in boycotts of more than
+16\%. Changing one country's media freedom from the least free to the
+most free is associated with an increase in the willingness to
+participate in demonstrations of more than 24\%. Changing one country's
+media freedom from the least free to the most free is associated with an
+increase in the willingness to participate in strikes of more than 24\%.
+
+This estimated coefficient is of statistical significance for all four
+political activities, as the p-values are all consistently far below
+0.05, being respectively \textless0.001, 0.002, \textless0.001, and
+\textless0.001. In this case, the null hypothesis of no relationship
+between media freedom and willingness to participate in political
+activities can be rejected. This means that the chance that this
+estimated coefficient is a result of chance and that there is actually
+no relationship between media freedom and willingness to participate in
+political activities is less than 5\%.
+
+In terms of causality, I don't think this regression is sufficient
+enough to claim a causal conclusion between media freedom and political
+participation. While I did try to control confounders such as education,
+income, and political interest, there are also numerous other
+confounders such as polity, age, inequality, and geography that I have
+not taken into account because of restraints in the dataframe. Polity,
+for example, could be an omitted variable that explains both media
+freedom and political participation differences; in democracy, there
+could be higher media freedom, and simultaneously people could be more
+encouraged to participate in political affairs. To control for all or
+most confounding variables, I will have to merge data from multiple
+other sources, which for this project was not plausible in terms of
+time. Therefore, though I did control the confounding variables that I
+could think of using current sources, the possibility of numerous others
+make it difficult to draw a causal conclusion.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+In conclusion, media freedom by government control positively affects
+citizens' willingness of political participation. The positive effects
+range from more than 15\% to around 41\% by changing one country's media
+freedom from the least free to the most free, and these estimated
+effects are statistically significant. However, it is important to be
+mindful that this does not mean a causal relationship between the two
+due to the limitations of this study in controlling the numerous
+possible confounding variables such as polity, age, geography,
+inequality etc.. In this sense, if future research can control these
+variables, it would provide an opportunity to establish a causal
+relationship between media freedom and citizens' political
+participation. Additionally, it would be beneficial if future studies
+can take an experimental approach to this topic and, if possible, do a
+natural experiment on two similar countries in a time frame of at least
+one or two decades (e.g.~one country has a legal change increasing
+censorship, the other does not). This would not only help control
+confounders (by comparing two similar countries) but also provide a
+temporal perspective into the study of the relationship between media
+freedom and citizens' political participation.
+
+\hypertarget{works-cited}{%
+\subsection{Works Cited}\label{works-cited}}
+
+Leeson, Peter T. ``Media Freedom, Political Knowledge, and
+Participation.'' Journal of Economic Perspectives, vol.~22, no. 2, 2008,
+pp.~155--169., \url{https://doi.org/10.1257/jep.22.2.155}.
+
+``Media Freedom.'' Freedom House,
+\url{https://freedomhouse.org/issues/media-freedom}.
+
+``World Values Survey Association.'' WVS Database,
+\url{https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp}.
+
+\end{document}

@@ -2,8 +2,8 @@
 title: "Gov 50 Final Project"
 author: "Linda"
 date: "2022-12-14"
-output:
-    distill::distill_article:
+output: 
+distill::distill_article:
     self_contained: false
 ---
 
